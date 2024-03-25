@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+    <meta charset="utf-8">
+    <title>Student Name Converter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="studentController">
+<h2>Student Names</h2>
+<!-- Display the original student names -->
+<h3>Original Names:</h3>
+<ul>
+    <li ng-repeat="name in names">{{ name }}</li>
+</ul>
+<!-- Display the student names in uppercase using filters -->
+<h3>Names in Uppercase:</h3>
+<ul>
+    <li ng-repeat="name in names">{{ name | uppercase }}</li>
+</ul>
+<script>
+    angular.module('studentApp', [])
+        .controller('studentController', function ($scope) {
+            $scope.names = ['Mani', 'Ram', 'Sam'];
+        });
+</script>
+</body>
+</html>

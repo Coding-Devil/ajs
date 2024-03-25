@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="loginApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Math</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="loginController">
+    <h1>Login Form</h1>
+    <form ng-submit="login()">
+        Username<br>
+        <input type="text" ng-model="username" required placeholder="Enter username"> <br>
+        Password <br>
+        <input type="password" ng-model="password" required placeholder="Enter your password"> <br>
+        <button type="submit">Login</button>
+    </form>
+    <script>
+        var app = angular.module('loginApp', []);
+        app.controller('loginController', function ($scope) {
+            $scope.login = function () {
+                if ($scope.username && $scope.username.toLowerCase() === 'gokulnath' && $scope.password === '2003') {
+                    alert('Login successful');
+                } else {
+                    alert('Login failed. Invalid username or password.');
+                }
+            };
+        });
+    </script>
+</body>
+</html>

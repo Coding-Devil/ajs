@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Math</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="studentController">
+    <h2>Student Details</h2>
+    Student Name: <input type="text" ng-model="name" placeholder="Enter your name"/>
+    CGPA: <input type="number" ng-model="cgpa" ng-min="1" ng-max="10" placeholder="Enter your no."/> <!-- Fixed spacing in ng-min and ng-max -->
+    <button ng-click="addStudent()">Add Student</button>
+    <p>Total Students: {{ students.length }}</p>
+    <ul>
+        <li ng-repeat="student in students">
+            {{ student.name }} - CGPA: {{ student.cgpa }}
+        </li>
+    </ul>
+    <script>
+        var app = angular.module('studentApp', []);
+        app.controller('studentController', function ($scope) {
+            $scope.students = [];
+            $scope.addStudent = function () {
+                if ($scope.name && $scope.cgpa && $scope.cgpa >= 1 && $scope.cgpa <= 10) { // Added validation for CGPA range
+                    $scope.students.push({ name: $scope.name, cgpa: $scope.cgpa });
+                    // Clear the input fields
+                    $scope.name = '';
+                    $scope.cgpa = null; // Changed to null for resetting number input
+                }
+            };
+        });
+    </script>
+</body>
+</html>

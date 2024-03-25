@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="calculatorApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="calculatorController">
+    <h2>Simple Calculator</h2>
+    Enter Number 1: <input type="number" ng-model="num1" placeholder="Enter your no."> &nbsp;
+    Select Operator: <select ng-model="operator" aria-label="Select Operator">
+        <option value="+">Add</option>
+        <option value="-">Subtract</option>
+        <option value="*">Multiply</option>
+        <option value="/">Divide</option>
+    </select> &nbsp;
+    Enter Number 2: <input type="number" ng-model="num2" placeholder="Enter your no.">
+    <button ng-click="result = calculate()">Calculate</button>
+    <p ng-show="result !== undefined">Result: {{ result }}</p>
+    <script>
+        angular.module('calculatorApp', [])
+        .controller('calculatorController', function ($scope) {
+            $scope.calculate = function () {
+                var num1 = parseFloat($scope.num1);
+                var num2 = parseFloat($scope.num2);
+                
+                switch ($scope.operator) {
+                    case '+':
+                        $scope.result = num1 + num2;
+                        break;
+                    case '-':
+                        $scope.result = num1 - num2;
+                        break;
+                    case '*':
+                        $scope.result = num1 * num2;
+                        break;
+                    case '/':
+                        $scope.result = num2 !== 0 ? num1 / num2 : 'Cannot divide by zero';
+                        break;
+                    default:
+                        $scope.result = 'Invalid operation';
+                }
+            };
+        });
+    </script>
+</body>
+</html>
