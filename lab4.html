@@ -1,42 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="calculatorApp">
+<html lang="en" ng-app="App">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AngularJS Math</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>AJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
 </head>
-<body ng-controller="mathController">
-    <h2>Math Operations</h2>
-    Enter a Number: <input type="number" ng-model="inputNumber" placeholder="Enter your no."/>
-    <button ng-click="calculateFactorial()">Calculate Factorial</button>
-    <button ng-click="calculateSquare()">Calculate Square</button>
-    <p ng-show="factorialResult !== undefined">Factorial: {{ factorialResult }}</p>
-    <p ng-show="squareResult !== undefined">Square: {{ squareResult }}</p>
+<body ng-controller="Ctrl">
+    <h2> Math Functions</h2>
 
+    Enter a no: <input type="number" name="n1" ng-model="n" placeholder="Number">
+
+    Factorial : <button ng-click="calcFact()">Calculate Factorial</button>
+    Square : <button ng-click="calcSqr()">Calculate Sqr</button>
+
+    <hr>
+    <p> Factorial : {{ fact }}</p>
+    <p> Square : {{ sqr }} </p>  
+    
     <script>
-        var app = angular.module('mathApp', []);
-        app.controller('mathController', function ($scope) {
-            $scope.calculateFactorial = function () {
-                if ($scope.inputNumber >= 0) {
-                    $scope.factorialResult = factorial($scope.inputNumber);
-                } else {
-                    $scope.factorialResult = 'Cannot calculate factorial for negative numbers';
+        angular.module("App", []).controller('Ctrl', function($scope){
+
+            function factorial(n){
+                if(n==0 || n==1) {
+                        return 1;
+                } else{
+                        return n * factorial(n-1);
+                    }
+            }
+
+           
+            $scope.calcFact=function(){
+                if($scope.n >= 0) {
+                    $scope.fact = factorial($scope.n);    
+                }else{
+                    alert("Please enter valid number");
                 }
+            };
+            
+           
+            
+
+            $scope.calcSqr=function(){
+                $scope.sqr=$scope.n* $scope.n;
             };
 
-            $scope.calculateSquare = function () {
-                $scope.squareResult = $scope.inputNumber * $scope.inputNumber;
-            };
-            function factorial(n) {
-                if (n == 0 || n == 1) {
-                    return 1;
-                } else {
-                    return n * factorial(n - 1);
-                }
-            }
-        });
+        } );
+
     </script>
 </body>
 </html>
