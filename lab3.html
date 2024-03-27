@@ -1,49 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="calculatorApp">
+<html lang="en" ng-app="App">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AngularJS Calculator</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>AJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
 </head>
-<body ng-controller="calculatorController">
-    <h2>Simple Calculator</h2>
-    Enter Number 1: <input type="number" ng-model="num1" placeholder="Enter your no."> &nbsp;
-    Select Operator: <select ng-model="operator" aria-label="Select Operator">
-        <option value="+">Add</option>
-        <option value="-">Subtract</option>
-        <option value="*">Multiply</option>
-        <option value="/">Divide</option>
-    </select> &nbsp;
-    Enter Number 2: <input type="number" ng-model="num2" placeholder="Enter your no.">
-    <button ng-click="result = calculate()">Calculate</button>
-    <p ng-show="result !== undefined">Result: {{ result }}</p>
+<body ng-controller="Ctrl">
+    <h2> Calculator</h2>
+
+    n1: <input type="number" ng-model="n1" placeholder="Enter a number 1"/> 
+
+    Operator: 
+    <select name="Operator" ng-model="operator">Operator :
+        <option value="+">Plus (+) </option>
+        <option value="-">Minus (-) </option>
+        <option value="*">Mul (x) </option>
+        <option value="/">Div (/ ) </option><br/>
+    </select>
+
+    n2: <input type="number" ng-model="n2" placeholder="Enter a number 2"/>  
+  
+    <button ng-click="res = calculate()">Calculate!</button>
+
+    <p>Result: {{ res }}</p>
+
+    
     <script>
-        angular.module('calculatorApp', [])
-        .controller('calculatorController', function ($scope) {
-            $scope.calculate = function () {
-                var num1 = parseFloat($scope.num1);
-                var num2 = parseFloat($scope.num2);
-                
+        angular.module("App", []).controller('Ctrl', function($scope){
+
+            $scope.calculate=function(){
+
+            var n1 = parseFloat($scope.n1);
+            var n2 = parseFloat($scope.n2);
+
                 switch ($scope.operator) {
                     case '+':
-                        $scope.result = num1 + num2;
-                        break;
+                        return $scope.res = n1 + n2;
+                        
                     case '-':
-                        $scope.result = num1 - num2;
-                        break;
+                        return $scope.res = n1 - n2;
+                    
                     case '*':
-                        $scope.result = num1 * num2;
-                        break;
+                        return $scope.res = n1 * n2;
+                        
                     case '/':
-                        $scope.result = num2 !== 0 ? num1 / num2 : 'Cannot divide by zero';
-                        break;
-                    default:
-                        $scope.result = 'Invalid operation';
+                        if(n2 == 0)
+                            alert ("Error! Division by zero is not allowed.");
+                        else    
+                            return $scope.res = n1 / n2;
                 }
             };
-        });
+            
+        } );
+
     </script>
 </body>
 </html>
